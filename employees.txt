@@ -14,3 +14,11 @@ Salary      : 30000.0
 Account ID  : ACC-5a7021ad
 
 -----------------------------
+Employee ID : EMP123
+Name        : Sindhur
+Email       : sindhur@gmail.com
+Phone       : 8341485158
+Salary      : 30000.0
+Account ID  : ACC-09b44402
+
+-----------------------------
