@@ -8,6 +8,7 @@ import com.employeepayrollapp.exceptions.ValidationException;
 import com.employeepayrollapp.service.AuthenticationService;
 import com.employeepayrollapp.service.PayrollService;
 import com.employeepayrollapp.payroll.Payslip;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -29,7 +30,8 @@ public class Main {
         	System.out.println("2 Login");
         	System.out.println("3 Generate Payslip");
         	System.out.println("4 Download Payslip");
-        	System.out.println("5 Exit");
+        	System.out.println("5 Dashboard");
+        	System.out.println("6 Exit");
 
             System.out.print("Enter choice: ");
 
@@ -166,8 +168,42 @@ public class Main {
                         }
 
                         break;
-
+                    
                     case 5:
+
+                        System.out.print("Enter Employee ID: ");
+                        String empId = scanner.nextLine();
+
+                        System.out.print("Enter Employee Name: ");
+                        String empName = scanner.nextLine();
+
+                        System.out.print("Enter Role (EMPLOYEE/MANAGER): ");
+                        String role = scanner.nextLine();
+
+                        com.employeepayrollapp.dashboard.Employee dashEmployee =
+                                new com.employeepayrollapp.dashboard.Employee(empId, empName, role);
+
+                        ArrayList<com.employeepayrollapp.dashboard.Payslip> payslips =
+                                new ArrayList<>();
+
+                        // Sample payslip data
+                        payslips.add(new com.employeepayrollapp.dashboard.Payslip("Jan", 30000));
+                        payslips.add(new com.employeepayrollapp.dashboard.Payslip("Feb", 32000));
+                        payslips.add(new com.employeepayrollapp.dashboard.Payslip("Mar", 31000));
+                        payslips.add(new com.employeepayrollapp.dashboard.Payslip("Apr", 33000));
+                        payslips.add(new com.employeepayrollapp.dashboard.Payslip("May", 34000));
+
+                        com.employeepayrollapp.dashboard.Dashboard dashboard =
+                                com.employeepayrollapp.dashboard.DashboardFactory.getDashboard(role);
+
+                        if (dashboard != null) {
+
+                            dashboard.display(payslips, dashEmployee);
+                        }
+
+                        break;
+
+                    case 6:
 
                         System.out.println("Exiting application...");
                         scanner.close();
