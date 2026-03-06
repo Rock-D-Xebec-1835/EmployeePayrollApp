@@ -2,6 +2,8 @@ package com.employeepayrollapp.dashboard;
 
 import java.util.*;
 
+import com.employeepayrollapp.exceptions.DataException;
+
 /*
  ManagerDashboard provides aggregate information.
 */
@@ -9,7 +11,10 @@ import java.util.*;
 public class ManagerDashboard implements Dashboard {
 
     @Override
-    public void display(ArrayList<Payslip> payslips, Employee employee) {
+    public void display(ArrayList<Payslip> payslips, Employee employee) throws DataException{
+    	if (payslips == null) {
+    	    throw new DataException("Dashboard data not loaded");
+    	}
 
         System.out.println("\n=== MANAGER DASHBOARD ===");
         System.out.println("Manager: " + employee.getName());

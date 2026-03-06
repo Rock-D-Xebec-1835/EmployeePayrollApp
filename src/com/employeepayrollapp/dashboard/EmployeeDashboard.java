@@ -1,7 +1,7 @@
 package com.employeepayrollapp.dashboard;
 
 import java.util.*;
-
+import com.employeepayrollapp.exceptions.*;
 /*
  EmployeeDashboard provides a personal view of payslip data.
 */
@@ -9,7 +9,10 @@ import java.util.*;
 public class EmployeeDashboard implements Dashboard {
 
     @Override
-    public void display(ArrayList<Payslip> payslips, Employee employee) {
+    public void display(ArrayList<Payslip> payslips, Employee employee) throws DataException{
+    	if (payslips == null || payslips.isEmpty()) {
+    	    throw new DataException("No payslip data available");
+    	}
 
         System.out.println("\n=== EMPLOYEE DASHBOARD ===");
         System.out.println("Welcome, " + employee.getName());

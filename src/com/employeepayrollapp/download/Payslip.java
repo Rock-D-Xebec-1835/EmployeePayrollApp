@@ -1,4 +1,5 @@
 package com.employeepayrollapp.download;
+import com.employeepayrollapp.exceptions.*;
 
 /*
  Payslip represents a finalized salary record.
@@ -36,8 +37,12 @@ public final class Payslip implements Cloneable {
      Creates a safe copy of the payslip.
     */
     @Override
-    public Object clone() {
-        return new Payslip(empId, empName, month, netPay);
+    public Object clone() throws CloneException {
+        try {
+            return new Payslip(empId, empName, month, netPay);
+        } catch (Exception e) {
+            throw new CloneException("Failed to clone payslip");
+        }
     }
 
     /*

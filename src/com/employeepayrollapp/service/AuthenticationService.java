@@ -8,6 +8,7 @@ import com.employeepayrollapp.employee.Manager;
 import com.employeepayrollapp.employee.RegularEmployee;
 import com.employeepayrollapp.employee.Session;
 import com.employeepayrollapp.employee.User;
+import com.employeepayrollapp.exceptions.*;
 
 public class AuthenticationService {
 
@@ -29,11 +30,10 @@ public class AuthenticationService {
      Registers a new user account.
      Called when employee registration happens.
     */
-    public void registerUser(String username, String password) {
+    public void registerUser(String username, String password) throws AuthenticationException{
 
         if (users.containsKey(username)) {
-            System.out.println("Username already exists.");
-            return;
+        	throw new AuthenticationException("User Already Exists");
         }
 
         users.put(username, new RegularEmployee(username, password));
@@ -45,7 +45,7 @@ public class AuthenticationService {
     /*
      Handles login flow.
     */
-    public Session login() {
+    public Session login() throws AuthenticationException{
 
         Scanner scanner = new Scanner(System.in);
 
@@ -62,9 +62,7 @@ public class AuthenticationService {
             User user = users.get(username);
 
             if (user == null) {
-                System.out.println("User not found.");
-                attempts++;
-                continue;
+            	throw new AuthenticationException("User not found");
             }
 
             // Polymorphism happens here
@@ -84,9 +82,8 @@ public class AuthenticationService {
             System.out.println("Invalid credentials. Attempts left: " + (maxAttempts - attempts));
         }
 
-        System.out.println("Maximum login attempts exceeded.");
+        throw new AuthenticationException("Maximum login attempts exceeded");
 
-        return null;
     }
 
 
