@@ -11,6 +11,8 @@ target/
 # Java
 *.class
 employees.txt
+*.txt
+*.pdf
 
 
 # Logs
